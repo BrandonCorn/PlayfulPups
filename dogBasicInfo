@@ -17,6 +17,7 @@ public class DogBasicInfo extends dogServices{
     
     
     
+    
     /**
      * Constructor for objects of class Dog
      */
@@ -99,6 +100,30 @@ public class DogBasicInfo extends dogServices{
         return parentPhoneNumber; 
     }
     
+   
+    public void setUniqueId){
+
+        String s = "";
+        double d;
+        for (int i = 1; i <= 8; i++) {
+            d = Math.random()*10;
+            s = s + ((int)d);
+            if (i % 4 == 0 && i != 8) {
+                s = s + "-";
+                }
+            }
+     }
+            
+               
+     public String getUniqueId(){
+        return Uniqueid;
+        }
+     
+            
+        
+
+       
+       
     public String dogBasicInfo(){
         System.out.println("Cubby number: " + dogCubby); 
         System.out.println("Dog first name: " + dogFirstname); 
