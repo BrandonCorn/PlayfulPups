@@ -1,0 +1,205 @@
+
+import java.util.Date;
+public class tenure extends DogBasicInfo
+{
+
+    public String dateArrive; 
+    public String dateDepart; 
+    public String timeOut;
+    public String allServices; 
+    public float costServices; 
+    public String groomService;
+    public float costGroom;
+    public String boardingService; 
+    public float costBoarding;
+    public String daycareService;
+    public float costDaycare;
+    public String additionalService;
+    public float costAdditionalService;
+    
+
+    
+    
+    /**
+     * Constructor for objects of class tenure
+     */
+    public void tenure(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas)
+    {
+
+        dateArrive = arrival;
+        dateDepart= departure;
+        timeOut = leaveTime;
+        costServices = cg + cb + cd + cas;
+        groomService = g;
+        costGroom = cg;
+        boardingService = bs;
+        costBoarding = cb;
+        daycareService = ds;
+        costDaycare = cd;
+        additionalService = as;
+        costAdditionalService = cas;
+        allServices = groomService + boardingService + daycareService + additionalService;;
+        costServices = costGroom + costBoarding + costDaycare + costAdditionalService;;
+    }
+
+    
+    public void setArrival(String arrival){
+        
+        dateArrive = arrival;
+    }
+    
+    public String getArrival(){
+        return dateArrive;
+        
+}
+
+    public void setDeparture(String departure){
+        
+        dateDepart = departure;
+    }
+    
+    public String getDeparture(){
+        return dateDepart; 
+    }
+    
+    public void setTimeout(String leaveTime){
+        
+        timeOut = leaveTime;
+    }
+    
+    public String getTimeout(){
+        return timeOut;
+    }
+    
+    /* returns total services for dog
+     * no param
+     */
+    public String getAllservices()
+    {   
+        return allServices;
+    }
+    
+    /* returns cost of Dogs services
+     * no param
+     */
+    public float getTotalCost(){
+        return costServices;
+}
+    /* sets what grooming services the dog will have
+     * @param String 
+     */
+    public void setGroomService(String g)
+    {
+        groomService = g;
+    }
+    
+    /* returns the grooming services provided
+     * no param
+     */
+    public String getGroomService()
+    {
+        return groomService;
+    }
+    
+    /*sets the cost of the groom for this dog
+     * @param Float cost of the groom 
+     */
+    public void setGroomCost(float cg)
+    {
+         costGroom= cg;
+    }
+    
+    /*returns the cost of the grooming services
+     * no param
+     */
+    public float getGroomCost()
+    {
+        return costGroom;
+    }
+    
+    /*sets the Boarding Service for this dog
+     * parameter string boarding service
+     */
+    public void setBoardingService(String bs){
+        boardingService = bs;
+    }
+    
+    /*returns the boarding service for this dog
+     * no param
+     */
+    public String getBoardingService(){
+        return boardingService; 
+    }
+    
+    /*sets the cost of boarding
+     * param float boarding cost
+     */
+    public void setBoardingCost(float cb){
+        costBoarding = cb;
+    }
+    
+    /*returns the boarding cost
+     * no param
+     */
+    public float getBoardingCost(){
+        return costBoarding;
+    }
+    
+    /*sets the daycare service
+     * param string daycare service
+     */
+    public void setDaycareService(String ds){
+        daycareService = ds;
+    }
+
+
+    /*returns the daycare service
+     * no param
+     */
+    public String getDaycareService(){
+        return daycareService;
+    }
+    
+    /*set cost of daycare service
+     * param cost of daycare service
+     */
+    public void setCostDaycare(float cd){
+        costDaycare = cd;
+    }
+    
+    /*returns the cost of daycare services
+     * no param
+     */
+    public float getCostDaycare(){
+        return costDaycare; 
+    }
+    
+    /*set cost of additional services
+     * param string additional service
+     */
+    public void setAdditionalService(String as){
+        additionalService = as;
+    }
+    
+    /*returns the cost of additional services
+     * no param
+     */
+    public float getCostAdditionalService(){
+        return costAdditionalService;
+    }
+    
+    public String dogInfo(){
+        System.out.println("Date Arrive: " + dateArrive); 
+        System.out.println("Date Depart: " + dateDepart); 
+        System.out.println("Time Leaving: " + timeOut);
+        System.out.println("Boarding Cost $" + costBoarding); 
+        System.out.println("Groom Cost $" + costGroom);
+        System.out.println("Daycare Cost $" + costDaycare);        
+        System.out.println("Additional Services Cost $" + costAdditionalService); 
+        
+        return ""; 
+    }
+}
+        
+
+
