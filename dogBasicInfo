@@ -12,7 +12,7 @@ public class DogBasicInfo extends dogServices{
     public String parentLastName;
     public String parentAddress; 
     public String parentPhoneNumber; 
-    
+    public String uniqueID;
     
     
     
@@ -22,7 +22,7 @@ public class DogBasicInfo extends dogServices{
      * Constructor for objects of class Dog
      */
     
-    public void Dog(int cubby, String firstName, String lastName, String breed, String ownerFirstName, String ownerLastName, String ownerAddress, String ownerPhoneNumber)
+    public void Dog(int cubby, String firstName, String lastName, String breed, String ownerFirstName, String ownerLastName, String ownerAddress, String ownerPhoneNumber, String uIdentifier)
     {
         dogCubby = cubby; 
         dogFirstname = firstName; 
@@ -32,7 +32,7 @@ public class DogBasicInfo extends dogServices{
         parentLastName = ownerLastName; 
         parentAddress = ownerAddress; 
         parentPhoneNumber = ownerPhoneNumber; 
-        
+        uniqueID = uIdentifier;
         
     }
 
@@ -101,21 +101,21 @@ public class DogBasicInfo extends dogServices{
     }
     
    
-    public void setUniqueId){
+    public void setUniqueId(){
 
-        String s = "";
+        String uniqueID = "";
         double d;
         for (int i = 1; i <= 8; i++) {
             d = Math.random()*10;
-            s = s + ((int)d);
+            uniqueId = uniqueId + ((int)d);
             if (i % 4 == 0 && i != 8) {
-                s = s + "-";
+                uniqueId = uniqueId + "-";
                 }
             }
      }
             
                
-     public String getUniqueId(){
+     public String getUniqueId(String id){
         return Uniqueid;
         }
      
