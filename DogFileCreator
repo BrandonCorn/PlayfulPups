@@ -1,6 +1,10 @@
-public void newDogFile()throws IOException{
+public class newDogFile extends dogServices{
     String fileName = "C:\\Users\\bbrennancorn\\Documents\\" + firstName + lastName;
-    File dogsFile = fileName; 
+    File dogsFile = fileName;
+
+
+public void newDogFile()throws IOException{
+     
     if (dogsFile.exists()){
   
         try (
@@ -24,4 +28,5 @@ public void newDogFile()throws IOException{
             outputStream.close();
     }
         
-           
+    }
+}
