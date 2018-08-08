@@ -1,8 +1,27 @@
 public void newDogFile()throws IOException{
-  try (
-    ByteArrayOutputStream bs = new ByteArrayOutputStream; 
-    ObjectOutput os = new ObjectOutput(bs);
-    os.writeObject(dog);
-    FileOutputStream fs = new FileOutputStream(dogsFile);
-    outputStream.write(os);
-    outputStream.close();
+    String fileName = "C:\\Users\\bbrennancorn\\Documents\\" + firstName + lastName;
+    File dogsFile = fileName; 
+    if (dogsFile.exists()){
+  
+        try (
+            ByteArrayOutputStream bs = new ByteArrayOutputStream; 
+            ObjectOutput os = new ObjectOutput(bs);
+            os.writeObject(dog);
+            FileOutputStream fs = new FileOutputStream(dogsFile);
+            outputStream.write(os);
+            outputStream.close();
+    }
+    
+    if(!dogsFile.exists()){
+        dogsFile.createNewFile();
+        
+        try (
+            ByteArrayOutputStream bs = new ByteArrayOutputStream; 
+            ObjectOutput os = new ObjectOutput(bs);
+            os.writeObject(dog);
+            FileOutputStream fs = new FileOutputStream(dogsFile);
+            outputStream.write(os);
+            outputStream.close();
+    }
+        
+           
