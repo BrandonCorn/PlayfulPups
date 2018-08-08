@@ -1,5 +1,8 @@
-public void newDogFile(){
-  try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-      new FileOutputStream("filename.txt"), "utf-8"))) {
-  writer.write();
-}
+public void newDogFile()throws IOException{
+  try (
+    ByteArrayOutputStream bs = new ByteArrayOutputStream; 
+    ObjectOutput os = new ObjectOutput(bs);
+    os.writeObject(dog);
+    FileOutputStream fs = new FileOutputStream(dogsFile);
+    outputStream.write(os);
+    outputStream.close();
