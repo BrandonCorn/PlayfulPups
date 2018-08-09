@@ -3,7 +3,7 @@ public class newDogFile extends dogServices{
     File dogsFile = fileName;
 
 
-public void newDogFile()throws IOException{
+public void writeDogFile()throws IOException{
      
     if (dogsFile.exists()){
   
@@ -29,4 +29,27 @@ public void newDogFile()throws IOException{
     }
         
     }
+    
+    public void readDogFile()throws IOException{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Who's file are we pulling? ");
+        System.out.println("First Name: ");
+        sc.nextLine();
+        sc.setFirstName();
+        System.out.println("Last Name: ");
+        sc.nextLine();
+        sc.setLastName();
+        FileInputStream inputStream = new FileInputStream(dogsFile);
+        byte[] buffer = byte[1000000000];
+        
+        int total = 0;
+        
+        while((total = inputStream.read(buffer) != -1){
+            System.out.println(new String(buffer));
+        }
+        
+        inputStream.close();
+            
+        
+        
 }
