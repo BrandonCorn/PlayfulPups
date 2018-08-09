@@ -34,11 +34,9 @@ public void writeDogFile()throws IOException{
         Scanner sc = new Scanner(System.in);
         System.out.println("Who's file are we pulling? ");
         System.out.println("First Name: ");
-        sc.nextLine();
-        sc.setFirstName();
+        String firstName = sc.nextLine();
         System.out.println("Last Name: ");
-        sc.nextLine();
-        sc.setLastName();
+        String lastName = sc.nextLine();
         FileInputStream inputStream = new FileInputStream(dogsFile);
         byte[] buffer = byte[1000000000];
         
