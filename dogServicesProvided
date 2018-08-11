@@ -24,10 +24,17 @@ public class dogServices
             //dog parent info
             tenure dog = new tenure();
             dog.createUniqueId();
-            System.out.println("Dog's Parent's First Name; ");
+            System.out.println("Parent's First Name; ");
             dog.setParentFirstName(sc.nextLine());
-            System.out.println("Dog's Parent's Last Name: ");
+            System.out.println("Parent's Last Name: ");
             dog.setParentLastName(sc.nextLine());
+            System.out.println("Parent's address: ");
+            dog.setParentAddress(sc.nextLine());
+            System.out.println("Parent's Phone Number: ");
+            dog.setParentPhoneNumber(sc.nextLine());
+            
+            
+            
      
             //dog basic info
             System.out.println("Dog's First Name: ");
@@ -52,7 +59,6 @@ public class dogServices
              System.out.println("Departure date: "); 
              dog.setDeparture(sc.nextLine()); 
              System.out.println("Time out: "); 
-             String timeOut = sc.nextLine(); 
              dog.setTimeout(sc.nextLine());
              System.out.println("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare: "); 
              String service = sc.nextLine();
@@ -69,6 +75,7 @@ public class dogServices
                      dog.setGroomCost(sc.nextFloat());
                      sc.nextLine();
                      System.out.println("");
+                     dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                      System.out.println(dog.dogBasicInfo());
                      System.out.println(dog.dogInfo());
                     }
@@ -79,6 +86,7 @@ public class dogServices
                  dog.setCostDaycare(sc.nextFloat()); 
                  sc.nextLine();
                  System.out.println(""); 
+                 dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                  System.out.println(dog.dogBasicInfo());
                  System.out.println(dog.dogInfo());
                  
@@ -103,6 +111,7 @@ public class dogServices
                         dog.setCostDaycare(daycareCost);
                         sc.nextLine();
                         System.out.println("");
+                        dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                         System.out.println(dog.dogBasicInfo());
                         System.out.println(dog.dogInfo());
                     }
@@ -148,6 +157,7 @@ public class dogServices
                         dog.setGroomCost(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
+                        dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                         System.out.println(dog.dogBasicInfo());
                         System.out.println(dog.dogInfo());
                         }
@@ -159,6 +169,7 @@ public class dogServices
                     dog.setCostDaycare(sc.nextFloat()); 
                     sc.nextLine();
                     System.out.println("");
+                    dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                     System.out.println(dog.dogBasicInfo());
                     System.out.println(dog.dogInfo());
                     }
@@ -180,6 +191,7 @@ public class dogServices
                         dog.setCostDaycare(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
+                        dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                         System.out.println(dog.dogBasicInfo());
                         System.out.println(dog.dogInfo());
                         
@@ -187,3 +199,29 @@ public class dogServices
             }
         }
         }
+        
+        
+        String fileName = "C:\\Users\\corn_\\OneDrive\\Documents\\dogFiles\\Dro.txt";
+        File dogsNewFile = new File(fileName);
+        dogsNewFile.createNewFile();
+        
+        
+        
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+            out = new ObjectOutputStream(bos);   
+            out.writeObject(dog);
+            out.flush();
+            byte[] yourBytes = bos.toByteArray();
+        }finally{
+            try{
+                bos.close();
+            }catch(IOException ex){                               
+    // ignore close exception
+}
+            catch(NullPointerException ex){}
+}
+        
+}
+}
