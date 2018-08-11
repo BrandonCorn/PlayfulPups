@@ -6,8 +6,7 @@ public class tenure extends DogBasicInfo
     public String dateArrive; 
     public String dateDepart; 
     public String timeOut;
-    public String allServices; 
-    public float costServices; 
+    public String []allServices;
     public String groomService;
     public float costGroom;
     public String boardingService; 
@@ -16,6 +15,7 @@ public class tenure extends DogBasicInfo
     public float costDaycare;
     public String additionalService;
     public float costAdditionalService;
+    public float costTotalServices;
     
 
     
@@ -23,26 +23,41 @@ public class tenure extends DogBasicInfo
     /**
      * Constructor for objects of class tenure
      */
-    public void tenure(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas)
+       public void tenure(){
     {
-
-        dateArrive = arrival;
-        dateDepart= departure;
-        timeOut = leaveTime;
-        costServices = cg + cb + cd + cas;
-        groomService = g;
-        costGroom = cg;
-        boardingService = bs;
-        costBoarding = cb;
-        daycareService = ds;
-        costDaycare = cd;
-        additionalService = as;
-        costAdditionalService = cas;
-        allServices = groomService + boardingService + daycareService + additionalService;;
-        costServices = costGroom + costBoarding + costDaycare + costAdditionalService;;
+        //String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas
+        // dateArrive = arrival;
+        // dateDepart= departure;
+        // timeOut = leaveTime;
+        // costServices = cg + cb + cd + cas;
+        // groomService = g;
+        // costGroom = cg;
+        // boardingService = bs;
+        // costBoarding = cb;
+        // daycareService = ds;
+        // costDaycare = cd;
+        // additionalService = as;
+        // costAdditionalService = cas;
+        // allServices = groomService + boardingService + daycareService + additionalService;;
+        // costServices = costGroom + costBoarding + costDaycare + costAdditionalService;;
+        dateArrive = "";
+        dateDepart = "";
+        timeOut = "";
+        allServices = new String[10];
+        costTotalServices = 0;
+        groomService = "";
+        costGroom = 0;
+        boardingService = "";
+        costBoarding = 0;
+        daycareService = "";
+        costDaycare = 0;
+        additionalService = "";
+        costAdditionalService = 0;
+        
+        
     }
 
-    
+}
     public void setArrival(String arrival){
         
         dateArrive = arrival;
@@ -71,19 +86,27 @@ public class tenure extends DogBasicInfo
         return timeOut;
     }
     
+    public void setAllServices(String groom, String boarding, String daycare, String additionalServices){
+       String[] allServices = {groom,boarding,daycare,additionalServices};
+}
     /* returns total services for dog
      * no param
      */
-    public String getAllservices()
+    public String[] getAllServices()
     {   
         return allServices;
     }
+    
+    public void setTotalCost(float costGroom, float costBoarding, float costDaycare, float costAdditionalServices){
+        costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalServices;
+    }
+    
     
     /* returns cost of Dogs services
      * no param
      */
     public float getTotalCost(){
-        return costServices;
+        return costTotalServices;
 }
     /* sets what grooming services the dog will have
      * @param String 
@@ -196,10 +219,14 @@ public class tenure extends DogBasicInfo
         System.out.println("Groom Cost $" + costGroom);
         System.out.println("Daycare Cost $" + costDaycare);        
         System.out.println("Additional Services Cost $" + costAdditionalService); 
-        
+        System.out.println("Total Cost: $" + costTotalServices);
         return ""; 
     }
+    
+    public String toString(){
+        return dateArrive + dateDepart + timeOut + boardingService + costBoarding + groomService + 
+        costGroom + daycareService + costDaycare + costAdditionalService + allServices + costTotalServices;
 }
-        
+}
 
 
