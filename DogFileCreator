@@ -1,0 +1,53 @@
+public class newDogFile extends dogServices{
+    String fileName = "C:\\Users\\bbrennancorn\\Documents\\" + firstName + lastName;
+    File dogsFile = fileName;
+
+
+public void writeDogFile()throws IOException{
+     
+    if (dogsFile.exists()){
+  
+        try (
+            ByteArrayOutputStream bs = new ByteArrayOutputStream; 
+            ObjectOutput os = new ObjectOutput(bs);
+            os.writeObject(dog);
+            FileOutputStream fs = new FileOutputStream(dogsFile);
+            outputStream.write(os);
+            outputStream.close();
+    }
+    
+    if(!dogsFile.exists()){
+        dogsFile.createNewFile();
+        
+        try (
+            ByteArrayOutputStream bs = new ByteArrayOutputStream; 
+            ObjectOutput os = new ObjectOutput(bs);
+            os.writeObject(dog);
+            FileOutputStream fs = new FileOutputStream(dogsFile);
+            outputStream.write(os);
+            outputStream.close();
+    }
+        
+    }
+    
+    public void readDogFile()throws IOException{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Who's file are we pulling? ");
+        System.out.println("First Name: ");
+        String firstName = sc.nextLine();
+        System.out.println("Last Name: ");
+        String lastName = sc.nextLine();
+        FileInputStream inputStream = new FileInputStream(dogsFile);
+        byte[] buffer = byte[1000000000];
+        
+        int total = 0;
+        
+        while((total = inputStream.read(buffer) != -1){
+            System.out.println(new String(buffer));
+        }
+        
+        inputStream.close();
+            
+        
+        
+}
