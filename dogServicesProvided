@@ -1,78 +1,82 @@
 
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException; 
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutput;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.util.Scanner;
+
+
 public class dogServices 
 {
-    public static void dogService(){
+    tenure dog;
+    public  void dogService()throws IOException{
    
         Scanner sc = new Scanner(System.in);
         System.out.println("Is this dog new?(yes/no): ");
         String newDog = sc.nextLine();
-        if (newDog.equals("yes")){
+        if (newDog.equalsIgnoreCase("yes")){
             //dog parent info
             tenure dog = new tenure();
+            dog.createUniqueId();
             System.out.println("Dog's Parent's First Name; ");
-            String parentFirstName = sc.nextLine();
-            dog.setParentFirstName(parentFirstName);
+            dog.setParentFirstName(sc.nextLine());
             System.out.println("Dog's Parent's Last Name: ");
-            String parentLastName = sc.nextLine();
-            dog.setParentLastName(parentLastName);
+            dog.setParentLastName(sc.nextLine());
      
             //dog basic info
             System.out.println("Dog's First Name: ");
-            String firstName = sc.nextLine();
-            dog.setFirstname(firstName);
+            dog.setFirstname(sc.nextLine());
             System.out.println("Dog's Last Name: ");
-            String lastName = sc.nextLine();
-            dog.setLastname(lastName); 
+            dog.setLastname(sc.nextLine()); 
             System.out.println("Dog's breed: ");
             String breed = sc.nextLine();
             dog.setdogBreed(breed);
          
             //dog info if staying 
-            System.out.print("Is " + firstName + " " + lastName + " here for a service?(yes/no):  "); 
+            System.out.print("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  "); 
             String hereForService = sc.nextLine();
             System.out.println("");
-            if (hereForService.equals("yes")){
-             System.out.print(firstName + "'s cubby number: ");
-             int cubby = sc.nextInt();
-             dog.setCubby(cubby);
+            if (hereForService.equalsIgnoreCase("yes")){
+             System.out.print(dog.getFirstname() + "'s cubby number: ");
+             dog.setCubby(sc.nextInt());
              sc.nextLine();
              
              System.out.print("Arrival date: ");
-             String arrival = sc.nextLine();
-             dog.setArrival(arrival);
+             dog.setArrival(sc.nextLine());
              System.out.println("Departure date: "); 
-             String departure  = sc.nextLine();
-             dog.setDeparture(departure); 
+             dog.setDeparture(sc.nextLine()); 
              System.out.println("Time out: "); 
              String timeOut = sc.nextLine(); 
-             dog.setTimeout(timeOut);
-             System.out.println("Is " + firstName + " " + lastName + " here for Boarding, Grooming, Daycare: "); 
-             String service = sc.nextLine(); 
-             if (service.equals("boarding")){
+             dog.setTimeout(sc.nextLine());
+             System.out.println("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare: "); 
+             String service = sc.nextLine();
+             if (service.equalsIgnoreCase("boarding")){
                  dog.setBoardingService(service);
                  //ENTER THE PRICE FOR THE BOARDING (DEPARTURE DATE-ARRIVAL DATE
                  
-                 System.out.println("Is " + firstName + " being groomed?(yes/no): "); 
+                 System.out.println("Is " + dog.getFirstname() + " being groomed?(yes/no): "); 
                  String groom = sc.nextLine(); 
-                 if (groom.equals("yes")){
+                 if (groom.equalsIgnoreCase("yes")){
                      System.out.print("What groom Service(s): ");
-                     String groomService = sc.nextLine(); 
-                     dog.setGroomService(groomService); 
+                     dog.setGroomService(sc.nextLine()); 
                      System.out.print("Groom price: ");
-                     float groomPrice = sc.nextFloat();
-                     dog.setGroomCost(groomPrice);
+                     dog.setGroomCost(sc.nextFloat());
                      sc.nextLine();
                      System.out.println("");
                      System.out.println(dog.dogBasicInfo());
                      System.out.println(dog.dogInfo());
                     }
                 }
-             else if (service.equals("daycare")){
+             else if (service.equalsIgnoreCase("daycare")){
                  dog.setDaycareService(service);
                  System.out.print("Daycare cost: ");
-                 float daycareCost = sc.nextFloat(); 
-                 dog.setCostDaycare(daycareCost); 
+                 dog.setCostDaycare(sc.nextFloat()); 
                  sc.nextLine();
                  System.out.println(""); 
                  System.out.println(dog.dogBasicInfo());
@@ -80,20 +84,19 @@ public class dogServices
                  
                 }
              
-             else if (service.equals("grooming")){
+             else if (service.equalsIgnoreCase("grooming")){
                    dog.setGroomService(service);
                    System.out.print("What groom Service(s): ");
-                   String groomService = sc.nextLine(); 
-                   dog.setGroomService(groomService); 
+                   dog.setGroomService(sc.nextLine()); 
                    System.out.print("Groom price: ");
                    float groomPrice = sc.nextFloat();
-                   dog.setGroomCost(groomPrice);
+                   dog.setGroomCost(sc.nextFloat());
                    sc.nextLine();
                    System.out.println("");
                    
-                   System.out.print("Is " + firstName + " participating in daycare?(yes/no): ");
+                   System.out.print("Is " + dog.getFirstname() + " participating in daycare?(yes/no): ");
                    String daycareService = sc.nextLine();
-                   if (daycareService.equals("yes")){
+                   if (daycareService.equalsIgnoreCase("yes")){
                         dog.setDaycareService(daycareService);
                         System.out.print("Daycare cost: ");
                         float daycareCost = sc.nextFloat(); 
@@ -106,84 +109,75 @@ public class dogServices
                 }
             }
         }
-        else if (newDog.equals("no")){
+        else if (newDog.equalsIgnoreCase("no")){
             tenure dog = new tenure();
             System.out.println("Dog's First Name: ");
-            String firstName = sc.nextLine();
-            dog.setFirstname(firstName);
+            dog.setFirstname(sc.nextLine());
             System.out.println("Dog's Last Name: ");
-            String lastName = sc.nextLine();
-            dog.setLastname(lastName); 
+            dog.setLastname(sc.nextLine()); 
             System.out.println("Dog's breed: ");
             String breed = sc.nextLine();
-            dog.setdogBreed(breed);
+            dog.setdogBreed(sc.nextLine());
      
             //dog info if staying 
-            System.out.print("Is " + firstName + " " + lastName + " here for a service?(yes/no):  "); 
+            System.out.print("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  "); 
             String hereForService = sc.nextLine(); 
-            if (hereForService.equals("yes")){
-                System.out.print(firstName + "'s cubby number: ");
-                int cubby = sc.nextInt();
-                dog.setCubby(cubby);
+            if (hereForService.equalsIgnoreCase("yes")){
+                System.out.print(dog.getFirstname() + "'s cubby number: ");
+                dog.setCubby(sc.nextInt());
                 sc.nextLine();
                 System.out.print("Arrival date: ");
-                String arrival = sc.nextLine();
-                dog.setArrival(arrival);
+                dog.setArrival(sc.nextLine());
                 System.out.print("Departure date: "); 
-                String departure  = sc.nextLine();
-                dog.setDeparture(departure); 
+                dog.setDeparture(sc.nextLine()); 
                 System.out.println("Time out: "); 
-                String timeOut = sc.nextLine(); 
-                dog.setTimeout(timeOut);
-                System.out.println("Is " + firstName + " " + lastName + " here for Boarding, Grooming, Daycare: "); 
+                dog.setTimeout(sc.nextLine());
+                System.out.println("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare: "); 
                 String service = sc.nextLine(); 
-                if (service.equals("boarding")){
+                if (service.equalsIgnoreCase("boarding")){
                     dog.setBoardingService(service);
                     //ENTER THE PRICE FOR THE BOARDING (DEPARTURE DATE-ARRIVAL DATE
              
-                    System.out.println("Is " + firstName + " being groomed?(yes/no): "); 
+                    System.out.println("Is " + dog.getFirstname() + " being groomed?(yes/no): "); 
                     String groom = sc.nextLine(); 
-                    if (groom.equals("yes")){
+                    if (groom.equalsIgnoreCase("yes")){
                         System.out.print("What groom Service(s): ");
-                        String groomService = sc.nextLine(); 
-                        dog.setGroomService(groomService); 
+                        dog.setGroomService(sc.nextLine()); 
                         System.out.print("Groom price: ");
                         float groomPrice = sc.nextFloat();
-                        dog.setGroomCost(groomPrice);
+                        dog.setGroomCost(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
                         System.out.println(dog.dogBasicInfo());
                         System.out.println(dog.dogInfo());
                         }
             }
-                else if (service.equals("daycare")){
+                else if (service.equalsIgnoreCase("daycare")){
                     dog.setDaycareService(service);
                     System.out.print("Daycare cost: ");
                     float daycareCost = sc.nextFloat(); 
-                    dog.setCostDaycare(daycareCost); 
+                    dog.setCostDaycare(sc.nextFloat()); 
                     sc.nextLine();
                     System.out.println("");
                     System.out.println(dog.dogBasicInfo());
                     System.out.println(dog.dogInfo());
                     }
                 
-                else if(service.equals("grooming")){
+                else if(service.equalsIgnoreCase("grooming")){
                     dog.setGroomService(service);
                     System.out.print("What groom Service(s): ");
-                    String groomService = sc.nextLine(); 
-                    dog.setGroomService(groomService); 
+                    dog.setGroomService(sc.nextLine()); 
                     System.out.print("Groom price: ");
                     float groomPrice = sc.nextFloat();
-                    dog.setGroomCost(groomPrice);
+                    dog.setGroomCost(sc.nextFloat());
                     sc.nextLine();
                  
-                    System.out.print("Is " + firstName + " participating in daycare?(yes/no): ");
+                    System.out.print("Is " + dog.getFirstname() + " participating in daycare?(yes/no): ");
                     String daycareService = sc.nextLine();
-                    if (daycareService.equals("yes")){
+                    if (daycareService.equalsIgnoreCase("yes")){
                         dog.setDaycareService(daycareService);
                         System.out.print("Daycare cost: ");
-                        float daycareCost = sc.nextFloat(); 
-                        dog.setCostDaycare(daycareCost);
+                        dog.setCostDaycare(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
                         System.out.println(dog.dogBasicInfo());
@@ -192,7 +186,4 @@ public class dogServices
                 }
             }
         }
-        
-    }
-}
-}
+        }
