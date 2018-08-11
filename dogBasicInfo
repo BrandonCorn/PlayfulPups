@@ -1,4 +1,10 @@
 
+/**
+ * Write a description of class DogBasicInfo here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 
 
 
@@ -12,8 +18,7 @@ public class DogBasicInfo extends dogServices{
     public String parentLastName;
     public String parentAddress; 
     public String parentPhoneNumber; 
-    public String uniqueID;
-    
+    public String uniqueId;
     
     
     
@@ -32,7 +37,7 @@ public class DogBasicInfo extends dogServices{
         parentLastName = ownerLastName; 
         parentAddress = ownerAddress; 
         parentPhoneNumber = ownerPhoneNumber; 
-        uniqueID = uIdentifier;
+        uniqueId = uIdentifier;
         
     }
 
@@ -100,30 +105,6 @@ public class DogBasicInfo extends dogServices{
         return parentPhoneNumber; 
     }
     
-   
-    public void setUniqueId(){
-
-        String uniqueID = "";
-        double d;
-        for (int i = 1; i <= 8; i++) {
-            d = Math.random()*10;
-            uniqueId = uniqueId + ((int)d);
-            if (i % 4 == 0 && i != 8) {
-                uniqueId = uniqueId + "-";
-                }
-            }
-     }
-            
-               
-     public String getUniqueId(String id){
-        return Uniqueid;
-        }
-     
-            
-        
-
-       
-       
     public String dogBasicInfo(){
         System.out.println("Cubby number: " + dogCubby); 
         System.out.println("Dog first name: " + dogFirstname); 
@@ -132,8 +113,27 @@ public class DogBasicInfo extends dogServices{
         return "";
         
     }
+    
+        public String createUniqueId(){
+        String id = " ";
+        double d;
+        for (int i = 1; i <= 8; i++) {
+            d = Math.random()*10;
+            id = id + ((int)d);
+            if (i % 4 == 0 && i != 8) {
+                id = id + "-";
+                }
+            }
+            return id;
+     }
+            
+               
+     public String getUniqueId(String id){
+        return uniqueId;
+        }
 
     public String toString(){
-        return "This dog's name is " + dogFirstname + " " + dogLastname + " and " + dogFirstname + " is a " + dogBreed + ". " + dogFirstname + "'s cubby number is " + dogCubby; 
+        return "This dog's name is " + dogFirstname + " " + dogLastname + " and " + dogFirstname + " is a " + dogBreed + ". " + dogFirstname + "'s cubby number is " + dogCubby + 
+        ".There Parents name is " + parentFirstName + parentLastName + "and they live at " + parentAddress + ". Their phone number is " + parentPhoneNumber + "."; 
     }
 }
