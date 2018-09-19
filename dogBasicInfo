@@ -110,7 +110,7 @@ public class DogBasicInfo extends dogServices{
         return "";
         
     }
-    
+        //Fix me!!
         public String createUniqueId(){
         String id = " ";
         double d;
@@ -239,16 +239,9 @@ public class DogBasicInfo extends dogServices{
         return parentPhoneNumber; 
     }
     
-    public String dogBasicInfo(){
-        System.out.println("Cubby number: " + dogCubby); 
-        System.out.println("Dog first name: " + dogFirstname); 
-        System.out.println("Dog last name: " + dogLastname);
-        System.out.println("Dog's breed: " + dogBreed); 
-        return "";
+    
         
     }
 
-    public String toString(){
-        return "This dog's name is " + dogFirstname + " " + dogLastname + " and " + dogFirstname + " is a " + dogBreed + ". " + dogFirstname + "'s cubby number is " + dogCubby; 
-    }
+    
 }
