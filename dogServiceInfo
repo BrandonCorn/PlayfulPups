@@ -68,7 +68,7 @@ public class tenure extends DogBasicInfo
         return dateArrive;
         
 }
-
+    //Fix me!!
     public int daysBetween(String arrive, String departure){
         SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
         int days =-1;
