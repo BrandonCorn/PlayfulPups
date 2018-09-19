@@ -1,21 +1,30 @@
 
 import java.util.Date;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.lang.Math;
+
 public class tenure extends DogBasicInfo
 {
 
-    public String dateArrive; 
-    public String dateDepart; 
-    public String timeOut;
-    public String allServices; 
-    public float costServices; 
-    public String groomService;
-    public float costGroom;
-    public String boardingService; 
-    public float costBoarding;
-    public String daycareService;
-    public float costDaycare;
-    public String additionalService;
-    public float costAdditionalService;
+    public String dateArrive = ""; 
+    public String dateDepart = ""; 
+    public String timeOut = "";
+    public String []allServices = new String[10];
+    public String groomService = "";
+    public float costGroom = 0;
+    public String boardingService = ""; 
+    public float costBoarding = 0;
+    public String daycareService = "";
+    public float costDaycare = 0;
+    public String additionalService = "";
+    public float costAdditionalService = 0;
+    public float costTotalServices = 0;
+    public File dogFile; 
+    
+    
     
 
     
@@ -23,25 +32,32 @@ public class tenure extends DogBasicInfo
     /**
      * Constructor for objects of class tenure
      */
-    public void tenure(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas)
+       public void tenure(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas){
     {
 
-        dateArrive = arrival;
-        dateDepart= departure;
-        timeOut = leaveTime;
-        costServices = cg + cb + cd + cas;
-        groomService = g;
-        costGroom = cg;
-        boardingService = bs;
-        costBoarding = cb;
-        daycareService = ds;
-        costDaycare = cd;
-        additionalService = as;
-        costAdditionalService = cas;
-        allServices = groomService + boardingService + daycareService + additionalService;;
-        costServices = costGroom + costBoarding + costDaycare + costAdditionalService;;
-    }
+         dateArrive = arrival;
+         dateDepart= departure;
+         timeOut = leaveTime;
+         
+         groomService = g;
+         costGroom = cg;
+         boardingService = bs;
+         costBoarding = cb;
+         daycareService = ds;
+         costDaycare = cd;
+         additionalService = as;
+         costAdditionalService = cas;
 
+         costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalService;
+        
+        
+        
+    }
+}
+    public File getDogFile(String filePath){
+        File file = new File(filePath);
+        return file;
+    }
     
     public void setArrival(String arrival){
         
@@ -52,6 +68,23 @@ public class tenure extends DogBasicInfo
         return dateArrive;
         
 }
+
+    public int daysBetween(String arrive, String departure){
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        int days =-1;
+        try{
+            
+            Date dateArrive = sdf.parse(arrive);
+            Date dateDepart = sdf.parse(departure); 
+            days = (int) Math.abs((dateDepart.getTime() - dateArrive.getTime())/86400000);
+            
+            
+            
+        }
+        catch (Exception e){
+        }
+        return days;
+    }
 
     public void setDeparture(String departure){
         
@@ -71,19 +104,27 @@ public class tenure extends DogBasicInfo
         return timeOut;
     }
     
+    public void setAllServices(String groom, String boarding, String daycare, String additionalServices){
+       String[] allServices = {groom,boarding,daycare,additionalServices};
+}
     /* returns total services for dog
      * no param
      */
-    public String getAllservices()
+    public String[] getAllServices()
     {   
         return allServices;
     }
+    
+    public void setTotalCost(float costGroom, float costBoarding, float costDaycare, float costAdditionalServices){
+        costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalServices;
+    }
+    
     
     /* returns cost of Dogs services
      * no param
      */
     public float getTotalCost(){
-        return costServices;
+        return costTotalServices;
 }
     /* sets what grooming services the dog will have
      * @param String 
@@ -134,8 +175,9 @@ public class tenure extends DogBasicInfo
     /*sets the cost of boarding
      * param float boarding cost
      */
-    public void setBoardingCost(float cb){
-        costBoarding = cb;
+    public void setBoardingCost(int days){
+        
+        costBoarding = (float) (30 * days);
     }
     
     /*returns the boarding cost
@@ -181,12 +223,18 @@ public class tenure extends DogBasicInfo
         additionalService = as;
     }
     
+    public String getAdditionalService(){
+        return additionalService;
+    }
+    
     /*returns the cost of additional services
      * no param
      */
     public float getCostAdditionalService(){
         return costAdditionalService;
     }
+    
+    
     
     public String dogInfo(){
         System.out.println("Date Arrive: " + dateArrive); 
@@ -196,10 +244,29 @@ public class tenure extends DogBasicInfo
         System.out.println("Groom Cost $" + costGroom);
         System.out.println("Daycare Cost $" + costDaycare);        
         System.out.println("Additional Services Cost $" + costAdditionalService); 
-        
+        System.out.println("Total Cost: $" + costTotalServices);
         return ""; 
     }
-}
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Arrival Date: " + dateArrive).append(System.getProperty("line.separator"));
+        sb.append("Departure Date: " + dateDepart).append(System.getProperty("line.separator"));
+        sb.append("Time Out: " + timeOut).append(System.getProperty("line.separator"));
+        sb.append("Boarding Service: " + boardingService).append(System.getProperty("line.separator"));
+        sb.append("Cost of Boarding: $" + costBoarding).append(System.getProperty("line.separator"));
+        sb.append("Grooming Service: " + groomService).append(System.getProperty("line.separator"));
+        sb.append("Cost of Groom: $" + costGroom).append(System.getProperty("line.separator"));
+        sb.append("Daycare Service: " + daycareService).append(System.getProperty("line.separator"));
+        sb.append("Cost of Daycare: $" + costDaycare).append(System.getProperty("line.separator"));
+        sb.append("Additional Services: " + additionalService).append(System.getProperty("line.separator"));
+        sb.append("Cost of Additional Services: $" + costAdditionalService).append(System.getProperty("line.separator"));
+        sb.append("Total Cost for Visit: $" + costTotalServices).append(System.getProperty("line.separator"));
+        sb.append(" ").append(System.getProperty("line.separator"));
+        sb.append(" ").append(System.getProperty("line.separator"));
+        return sb.toString();
         
+}
+}
 
 
