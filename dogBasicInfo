@@ -2,6 +2,146 @@
 
 
 
+
+
+
+public class DogBasicInfo extends dogServices{
+    
+    public int dogCubby;
+    public String dogFirstname;
+    public String dogLastname;
+    public String dogBreed; 
+    public String parentFirstName;
+    public String parentLastName;
+    public String parentAddress; 
+    public String parentPhoneNumber; 
+    public String uniqueId;
+    
+    
+    
+    
+    /**
+     * Constructor for objects of class Dog
+     */
+    
+    public void Dog(int cubby, String firstName, String lastName, String breed, String ownerFirstName, String ownerLastName, String ownerAddress, String ownerPhoneNumber, String uIdentifier)
+    {
+        dogCubby = cubby; 
+        dogFirstname = firstName; 
+        dogLastname = lastName; 
+        dogBreed = breed; 
+        parentFirstName = ownerFirstName;
+        parentLastName = ownerLastName; 
+        parentAddress = ownerAddress; 
+        parentPhoneNumber = ownerPhoneNumber; 
+        uniqueId = uIdentifier;
+        
+    }
+
+    public void setCubby(int cubby){
+        dogCubby = cubby; 
+    
+    }
+    public int getCubby(){
+        return dogCubby; 
+    }
+    
+    public void setFirstname(String firstName){
+        dogFirstname = firstName;
+    }
+    
+    public String getFirstname(){
+        return dogFirstname; 
+    }
+    
+    public void setLastname(String lastName){
+        dogLastname = lastName; 
+    }
+    
+    public String getLastname(){
+        return dogLastname; 
+    }
+    
+    public void setdogBreed(String breed){
+        dogBreed = breed; 
+    }
+    
+    public String getBreed(){
+        return dogBreed; 
+    }
+    
+    public void setParentFirstName(String ownerFirstName){
+        parentFirstName = ownerFirstName;
+    }
+    
+    public String getParentFirstName(){
+        return parentFirstName; 
+    }
+    
+    public void setParentLastName(String ownerLastName){
+        parentLastName = ownerLastName; 
+    }
+    
+    public String getParentLastName (){
+        return parentLastName; 
+    }
+    
+    public void setParentAddress(String ownerAddress){
+        parentAddress = ownerAddress; 
+    }
+    
+    public String getParentAddress(){
+        return parentAddress; 
+    }
+    
+    public void setParentPhoneNumber(String ownerPhoneNumber){
+        parentPhoneNumber = ownerPhoneNumber; 
+    }
+    
+    public String getParentPhoneNumber(){
+        return parentPhoneNumber; 
+    }
+    
+    public String dogBasicInfo(){
+        System.out.println("Cubby number: " + dogCubby); 
+        System.out.println("Dog first name: " + dogFirstname); 
+        System.out.println("Dog last name: " + dogLastname);
+        System.out.println("Dog's breed: " + dogBreed); 
+        return "";
+        
+    }
+    
+        public String createUniqueId(){
+        String id = " ";
+        double d;
+        for (int i = 1; i <= 8; i++) {
+            d = Math.random()*10;
+            id = id + ((int)d);
+            if (i % 4 == 0 && i != 8) {
+                id = id + "-";
+                }
+            }
+            return id;
+     }
+            
+               
+     public void setUniqueId(String id){
+        uniqueId = id;
+        }
+
+    public String toString1(){
+        //return "This dog's name is " + dogFirstname + "/r/n" + dogLastname + "\n" +
+        //"Breed: "+ dogBreed + ". " + dogFirstname + "'s cubby number is " + dogCubby + 
+        //".There Parents name is " + parentFirstName + parentLastName + "and they live at " + parentAddress + ". Their phone number is " + parentPhoneNumber + "."; 
+        StringBuilder sb = new StringBuilder();
+        sb.append("Dog parent's name: " + parentFirstName + " " + parentLastName).append(System.getProperty("line.separator"));
+        sb.append("Dog first name: " + dogFirstname).append(System.getProperty("line.separator")); 
+        sb.append("Dog last name: " + dogLastname).append(System.getProperty("line.separator")); 
+        sb.append("Dog breed: " +dogBreed).append(System.getProperty("line.separator"));  
+        return sb.toString();
+    }
+}
+
 public class DogBasicInfo extends dogServices{
     
     public int dogCubby;
