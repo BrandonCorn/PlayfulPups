@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class dogServices 
+public class DogService
 {
     
     
@@ -21,17 +21,15 @@ public class dogServices
         // Take input to find out if dog has been to facility or not;
         System.out.println("Is this dog new?(yes/no): ");
         String newDog = sc.nextLine();
+       
         while(!(newDog.equalsIgnoreCase("yes")) && !(newDog.equalsIgnoreCase("no"))){
             System.out.println("Not a valid answer. Is this dog new? (yes/no)");
             newDog =sc.nextLine();
         }
         if (newDog.equalsIgnoreCase("yes")){
             //dog parent info
-            
-            
-            tenure dog = new tenure();
-            
-            System.out.println("Parent's First Name; ");
+            ServiceInfo dog = new ServiceInfo();
+            System.out.println("Parent's First Name: ");
             dog.setParentFirstName(sc.nextLine());
             System.out.println("Parent's Last Name: ");
             dog.setParentLastName(sc.nextLine());
@@ -39,34 +37,30 @@ public class dogServices
             dog.setParentAddress(sc.nextLine());
             System.out.println("Parent's Phone Number: ");
             dog.setParentPhoneNumber(sc.nextLine());
-            
-            
-            
-     
+                
             //dog basic info
+            dog.setUniqueId(dog.createUniqueId());
             System.out.println("Dog's First Name: ");
             dog.setFirstname(sc.nextLine());
             System.out.println("Dog's Last Name: ");
             dog.setLastname(sc.nextLine()); 
             System.out.println("Dog's breed: ");
             dog.setdogBreed(sc.nextLine());
-         
+            dog.newDogFile();
+        
             //dog info if staying 
             System.out.print("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  "); 
             String hereForService = sc.nextLine();
-            
             while (!(hereForService.equalsIgnoreCase("yes")) && !(hereForService.equalsIgnoreCase("no"))){
                 System.out.println("Not a valid answer. Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  ");
                 hereForService = sc.nextLine();
             }
             System.out.println("");
-            
             //If the dog is here for a service set cubby number, date arrival, date departure, and time departure     
             if (hereForService.equalsIgnoreCase("yes")){
              System.out.print(dog.getFirstname() + "'s cubby number: ");
              dog.setCubby(sc.nextInt());
              sc.nextLine();
-             
              System.out.print("Arrival date (ex.09/11/2018): ");
              dog.setArrival(sc.nextLine());
              System.out.println("Departure date (ex.09/14/2018): "); 
@@ -76,11 +70,10 @@ public class dogServices
              //ask if dog is here for boarding, grooming, daycare, or multiple services
              System.out.println("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare, or Other: "); 
              String service = sc.nextLine();
-             
              while (!(service.equalsIgnoreCase("boarding")) && !(service.equalsIgnoreCase("Grooming")) && !(service.equalsIgnoreCase("Daycare")) && !(service.equalsIgnoreCase("Other"))){
                  System.out.println("Not a valid answer. Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare, or Other: "); 
                  service = sc.nextLine();
-                }
+             }
              //if dog is boarding set the service to boarding
              if (service.equalsIgnoreCase("boarding")){
                  dog.setBoardingService(service);
@@ -92,10 +85,10 @@ public class dogServices
                  String groom = sc.nextLine(); 
                  
                  //make sure input from user is yes or no for whether dog is being groomed.
-                 while (! (groom.equalsIgnoreCase("yes") && groom.equalsIgnoreCase("no"))){
+                 while (! (groom.equalsIgnoreCase("yes")) && (!groom.equalsIgnoreCase("no"))){
                      System.out.println("Not a valid answer. Is " +  dog.getFirstname() + " being groomed?(yes/no): ");
                      groom = sc.nextLine();
-                    }
+                 }
                  if (groom.equalsIgnoreCase("yes")){
                      // set what grooming service is being done (bath, full groom, sanitary cut, nail trim, etc;
                      System.out.print("What groom Service(s): ");
@@ -105,12 +98,19 @@ public class dogServices
                      dog.setGroomCost(sc.nextFloat());
                      sc.nextLine();
                      System.out.println("");
+                 }
+                 System.out.println("Are we providing any additional services? ");
+                 String additionalService = sc.nextLine();
+                 while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                     System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                     additionalService = sc.nextLine();
+                 }
+                 if(additionalService.equalsIgnoreCase("yes")){
+                     System.out.println("What service? ");
+                     dog.setAdditionalService(sc.nextLine());
                      dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                     //prints out the general info for the dog, services provided, and price
-                     System.out.println(dog.dogBasicInfo());
-                     System.out.println(dog.dogInfo());
-                    }
-                }
+                 }
+             }
                 // if dog is here for daycare, service will be set to daycare
              else if (service.equalsIgnoreCase("daycare")){
                  dog.setDaycareService(service);
@@ -118,11 +118,18 @@ public class dogServices
                  dog.setCostDaycare(sc.nextFloat()); 
                  sc.nextLine();
                  System.out.println(""); 
-                 dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                 System.out.println(dog.dogBasicInfo());
-                 System.out.println(dog.dogInfo());
-                 
-                }
+                 System.out.println("Are we providing any additional services? ");
+                 String additionalService = sc.nextLine();
+                 while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                     System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                     additionalService = sc.nextLine();
+                 }
+                 if(additionalService.equalsIgnoreCase("yes")){
+                     System.out.println("What service? ");
+                     dog.setAdditionalService(sc.nextLine());
+                     dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
+                 }
+             }
              // if dog is here for just grooming, set grooming service and price that varies 
              else if (service.equalsIgnoreCase("grooming")){
                    System.out.print("What groom Service(s): ");
@@ -130,11 +137,11 @@ public class dogServices
                    System.out.print("Groom price: ");
                    dog.setGroomCost(sc.nextFloat());
                    sc.nextLine();
-                   
+            
                    // dog may participate in daycare, this will say yes or no if they are and set the price
                    System.out.print("Is " + dog.getFirstname() + " participating in daycare?(yes/no): ");
                    String daycareService = sc.nextLine();
-                   while (!(daycareService.equalsIgnoreCase("yes") && daycareService.equalsIgnoreCase("no"))){
+                   while (!(daycareService.equalsIgnoreCase("yes")) && (!daycareService.equalsIgnoreCase("no"))){
                        System.out.println("Not a valid answer. Is " + dog.getFirstname() + " participating in daycare?(yes/no): ");
                        daycareService = sc.nextLine();
                     }
@@ -144,41 +151,27 @@ public class dogServices
                         dog.setCostDaycare(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
-                        dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                        System.out.println(dog.dogBasicInfo());
-                        System.out.println(dog.dogInfo());
-                    }
-                }
-            }
-            BufferedWriter output = null;
-            System.out.println("Enter the where you would like to save the file (ex. C:\\user\\corn_\\documents\\dogFiles "); 
-            String fileName = sc.nextLine() +dog.getFirstname() + dog.getLastname() +".txt";
-            
-         //Creates file for dog and writes info for stay to file;    
+                   }
+             }
+             System.out.println("Are we providing any additional services? ");
+             String additionalService = sc.nextLine();
+             while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                 System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                 additionalService = sc.nextLine();
+             }
+             if(additionalService.equalsIgnoreCase("yes")){
+                 System.out.println("What service? ");
+                 dog.setAdditionalService(sc.nextLine());
+                 dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
+             }
+        }
+        dog.serviceFileInfo();
         
-        try{
-            File file = new File(fileName);
-            
-            output = new BufferedWriter(new FileWriter(file));
-            output.write(dog.toString1());
-            output.write(dog.toString());
-            
-            
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (output != null) {
-                output.close();
-            }
-        }
-        
-    }   
+        }   
     
     
         else if (newDog.equalsIgnoreCase("no")){
-            tenure dog = new tenure();
+            ServiceInfo dog = new ServiceInfo();
             System.out.println("Dog's First Name: ");
             dog.setFirstname(sc.nextLine());
             System.out.println("Dog's Last Name: ");
@@ -189,13 +182,11 @@ public class dogServices
             //dog info if staying 
             System.out.print("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  "); 
             String hereForService = sc.nextLine(); 
-            
             while (!(hereForService.equalsIgnoreCase("yes")) && !(hereForService.equalsIgnoreCase("no"))){
                 System.out.println("Not a valid answer. Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  ");
                 hereForService = sc.nextLine();
             }
             System.out.println("");
-            
             //if dog here for service sets cubby number, arrival date, departure date, and time leaving
             if (hereForService.equalsIgnoreCase("yes")){
                 System.out.print(dog.getFirstname() + "'s cubby number: ");
@@ -229,12 +220,19 @@ public class dogServices
                         dog.setGroomCost(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
+                    }
+                    System.out.println("Are we providing any additional services? ");
+                    String additionalService = sc.nextLine();
+                    while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                        System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                        additionalService = sc.nextLine();
+                    }
+                    if(additionalService.equalsIgnoreCase("yes")){
+                        System.out.println("What service? ");
+                        dog.setAdditionalService(sc.nextLine());
                         dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                        //prints out the dogs general info, services, and cost of services for visit
-                        System.out.println(dog.dogBasicInfo());
-                        System.out.println(dog.dogInfo());
-                        }
-            }
+                    }
+                }
                 // if dog here for daycare, sets service to daycare and the daycare cost from input
                 else if (service.equalsIgnoreCase("daycare")){
                     dog.setDaycareService(service);
@@ -242,10 +240,19 @@ public class dogServices
                     dog.setCostDaycare(sc.nextFloat()); 
                     sc.nextLine();
                     System.out.println("");
-                    dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                    System.out.println(dog.dogBasicInfo());
-                    System.out.println(dog.dogInfo());
+                    System.out.println("Are we providing any additional services? ");
+                    String additionalService = sc.nextLine();
+                    while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                     System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                     additionalService = sc.nextLine();
                     }
+                    if(additionalService.equalsIgnoreCase("yes")){
+                        System.out.println("What service? ");
+                        dog.setAdditionalService(sc.nextLine());
+                        dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
+                     }
+                }
+                
                 // if dog's here for grooming, the grooming service will be set and price that will vary
                 else if(service.equalsIgnoreCase("grooming")){
                     dog.setGroomService(service);
@@ -264,45 +271,21 @@ public class dogServices
                         dog.setCostDaycare(sc.nextFloat());
                         sc.nextLine();
                         System.out.println("");
+                    }
+                    System.out.println("Are we providing any additional services? ");
+                    String additionalService = sc.nextLine();
+                    while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
+                        System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
+                        additionalService = sc.nextLine();
+                    }
+                    if(additionalService.equalsIgnoreCase("yes")){
+                        System.out.println("What service? ");
+                        dog.setAdditionalService(sc.nextLine());
                         dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
-                        // prints out all the dogs general info, services, and cost of services
-                        System.out.println(dog.dogBasicInfo());
-                        System.out.println(dog.dogInfo());
-                        
-                }
+                    }
+                }   
             }
+            dog.serviceFileInfo();
         }
-        
-        BufferedWriter output = null;
-        String fileName = "C:\\Users\\corn_\\OneDrive\\Documents\\dogFiles\\" +dog.getFirstname() + dog.getLastname() +".txt";
-        
-        
-        try {
-            FileWriter fw = new FileWriter(fileName,true);
-            BufferedWriter obj = new BufferedWriter(fw);
-            
-            obj.write(dog.toString1());
-            obj.write(dog.toString());
-            obj.close();
-        }
-        catch (IOException e){
-        }
-    
-        finally {
-            if (output != null) {
-                output.close();
-            }
-        }
-    
-    }
     }
 }
-
-        
-        
-        
-        
-        
-        
-
-
