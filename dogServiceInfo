@@ -3,42 +3,50 @@ import java.util.Date;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.lang.Math;
 
-public class tenure extends DogBasicInfo
+public class ServiceInfo extends DogBasicInfo
 {
 
-    public String dateArrive = ""; 
-    public String dateDepart = ""; 
-    public String timeOut = "";
-    public String []allServices = new String[10];
-    public String groomService = "";
-    public float costGroom = 0;
-    public String boardingService = ""; 
-    public float costBoarding = 0;
-    public String daycareService = "";
-    public float costDaycare = 0;
-    public String additionalService = "";
-    public float costAdditionalService = 0;
-    public float costTotalServices = 0;
-    public File dogFile; 
+    public String dateArrive; 
+    public String dateDepart; 
+    public String timeOut;
+    public String groomService;
+    public float costGroom;
+    public String boardingService; 
+    public float costBoarding;
+    public String daycareService;
+    public float costDaycare;
+    public String additionalService;
+    public float costAdditionalService;
+    public float costTotalServices;
     
-    
-    
-
-    
-    
+    public ServiceInfo(){
+        
+        dateArrive = "";
+         dateDepart= "";
+         timeOut = "";
+         groomService = "";
+         costGroom = 0;
+         boardingService = "";
+         costBoarding = 0;
+         daycareService = "";
+         costDaycare = 0;
+         additionalService = "";
+         costAdditionalService = 0;
+         costTotalServices = 0;
+        }
+        
     /**
-     * Constructor for objects of class tenure
+     * Constructor for objects of class serviceInfo
      */
-       public void tenure(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas){
-    {
-
+    public ServiceInfo(String arrival, String departure, String leaveTime, String g, float cg, String bs, float cb, String ds, float cd, String as, float cas){
+    
          dateArrive = arrival;
          dateDepart= departure;
          timeOut = leaveTime;
-         
          groomService = g;
          costGroom = cg;
          boardingService = bs;
@@ -47,16 +55,7 @@ public class tenure extends DogBasicInfo
          costDaycare = cd;
          additionalService = as;
          costAdditionalService = cas;
-
-         costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalService;
-        
-        
-        
-    }
-}
-    public File getDogFile(String filePath){
-        File file = new File(filePath);
-        return file;
+         costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalService;                       
     }
     
     public void setArrival(String arrival){
@@ -67,8 +66,8 @@ public class tenure extends DogBasicInfo
     public String getArrival(){
         return dateArrive;
         
-}
-    //Fix me!!
+    }
+
     public int daysBetween(String arrive, String departure){
         SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
         int days =-1;
@@ -104,16 +103,6 @@ public class tenure extends DogBasicInfo
         return timeOut;
     }
     
-    public void setAllServices(String groom, String boarding, String daycare, String additionalServices){
-       String[] allServices = {groom,boarding,daycare,additionalServices};
-}
-    /* returns total services for dog
-     * no param
-     */
-    public String[] getAllServices()
-    {   
-        return allServices;
-    }
     
     public void setTotalCost(float costGroom, float costBoarding, float costDaycare, float costAdditionalServices){
         costTotalServices = costGroom + costBoarding + costDaycare + costAdditionalServices;
@@ -125,7 +114,7 @@ public class tenure extends DogBasicInfo
      */
     public float getTotalCost(){
         return costTotalServices;
-}
+    }
     /* sets what grooming services the dog will have
      * @param String 
      */
@@ -248,7 +237,7 @@ public class tenure extends DogBasicInfo
         return ""; 
     }
     
-    public String toString(){
+    public String serviceInfo(){
         StringBuilder sb = new StringBuilder();
         sb.append("Arrival Date: " + dateArrive).append(System.getProperty("line.separator"));
         sb.append("Departure Date: " + dateDepart).append(System.getProperty("line.separator"));
@@ -262,11 +251,39 @@ public class tenure extends DogBasicInfo
         sb.append("Additional Services: " + additionalService).append(System.getProperty("line.separator"));
         sb.append("Cost of Additional Services: $" + costAdditionalService).append(System.getProperty("line.separator"));
         sb.append("Total Cost for Visit: $" + costTotalServices).append(System.getProperty("line.separator"));
-        sb.append(" ").append(System.getProperty("line.separator"));
-        sb.append(" ").append(System.getProperty("line.separator"));
         return sb.toString();
-        
+    }
+    
+    public String toString(){
+        return "Arrival Date: " + dateArrive + System.lineSeparator() + "Departure Date: " + dateDepart + 
+        System.lineSeparator() + "Time out: " + timeOut + System.lineSeparator() + "Boarding Service: " + 
+        boardingService + System.lineSeparator() + "Cost of Boarding: " + costBoarding + System.lineSeparator()
+        + "Grooming Service: " + groomService + System.lineSeparator() + "Cost of Groom: " + costGroom + 
+        System.lineSeparator() + "Daycare Service: " + daycareService + System.lineSeparator() + "Cost of Daycare " +
+        costDaycare + System.lineSeparator() + "Additional Services: " + additionalService + System.lineSeparator()
+        + "Cost of Additional Services $" + costAdditionalService + System.lineSeparator() + "Total Cost for Visit $" + 
+        costTotalServices + System.lineSeparator() + System.lineSeparator(); 
+    }
+    
+    public void serviceFileInfo(){
+        BufferedWriter output;        
+        String folderPath = "C:\\Users\\corn_\\OneDrive\\Documents\\dogFiles\\" + dogFirstname + dogLastname + "\\Services";
+        File serviceDir = new File(folderPath);
+        try{
+            serviceDir.mkdirs();            
+        }
+        catch (SecurityException e){
+        }
+        String serviceFileName = folderPath + "\\" + dogFirstname + "Service.txt";
+        try{
+            File serviceFile = new File(serviceFileName);
+            output = new BufferedWriter(new FileWriter(serviceFileName));
+            output.write(serviceInfo());
+            output.close();
+        }
+        catch (IOException e){
+            
+        }
+    }
 }
-}
-
 
