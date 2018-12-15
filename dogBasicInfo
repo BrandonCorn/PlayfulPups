@@ -156,31 +156,8 @@ public class DogBasicInfo extends DogService{
          sb.append("Parent's Address: " + parentAddress).append(System.getProperty("line.separator"));
          sb.append("Parent's Phone Number: " + parentPhoneNumber).append(System.getProperty("line.separator"));
          return sb.toString();
-        }
-     
-     public void newDogFile(){
-           BufferedWriter output;
-           String dogFolderPath = "C:\\Users\\corn_\\OneDrive\\Documents\\dogFiles\\" + dogFirstname + dogLastname;
-           String mainFolderPath = dogFolderPath + "\\Main";
-           File dogDir = new File(dogFolderPath);
-           File mainDir = new File(mainFolderPath);
-           try{
-               dogDir.mkdirs();
-               mainDir.mkdirs();      
-            }
-           catch (SecurityException e){
-            }
-           String mainFileName = mainFolderPath + "\\main.txt";
-           try{
-               File mainFile = new File(mainFileName);
-               output = new BufferedWriter(new FileWriter(mainFileName));
-               output.write(basicInfo());
-               output.close();
-            }
-           catch (IOException e){
-            }
-            
-        }
+     }
+          
     public String toString(){
         return "Dog's unique Id: " + uniqueId + System.lineSeparator() + "Dog's Parent's Name: " + parentFirstName + " " + parentLastName +
         System.lineSeparator() + "Parent's Address: " + parentAddress + System.lineSeparator() + "Parent's Phone Number: " + parentPhoneNumber + System.lineSeparator() +
