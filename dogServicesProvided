@@ -10,11 +10,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class DogService
-{
-    
-    
-    
-    
+{    
     public void dogService()throws IOException{
     
         Scanner sc = new Scanner(System.in);
@@ -46,7 +42,7 @@ public class DogService
             dog.setLastname(sc.nextLine()); 
             System.out.println("Dog's breed: ");
             dog.setdogBreed(sc.nextLine());
-            dog.newDogFile();
+            
         
             //dog info if staying 
             System.out.print("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for a service?(yes/no):  "); 
@@ -165,11 +161,9 @@ public class DogService
                  dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
              }
         }
-        dog.serviceFileInfo();
-        
-        }   
-    
-    
+        dog.newDirectory();
+        dog.newFile();
+        }       
         else if (newDog.equalsIgnoreCase("no")){
             ServiceInfo dog = new ServiceInfo();
             System.out.println("Dog's First Name: ");
@@ -198,7 +192,6 @@ public class DogService
                 dog.setDeparture(sc.nextLine()); 
                 System.out.println("Time out (ex.4pm):  "); 
                 dog.setTimeout(sc.nextLine());
-                
                 System.out.println("Is " + dog.getFirstname() + " " + dog.getLastname() + " here for Boarding, Grooming, Daycare, or other: "); 
                 String service = sc.nextLine(); 
                 while (!(service.equalsIgnoreCase("boarding")) && !(service.equalsIgnoreCase("Grooming")) && !(service.equalsIgnoreCase("Daycare")) && !(service.equalsIgnoreCase("Other"))){
@@ -276,16 +269,25 @@ public class DogService
                     String additionalService = sc.nextLine();
                     while (!(additionalService.equalsIgnoreCase("yes")) && (!additionalService.equalsIgnoreCase("no"))){
                         System.out.println("Not a valid answer. Is " + dog.getFirstname() + " receiving additional services? ");
-                        additionalService = sc.nextLine();
+                        dog.setAdditionalService(additionalService);
                     }
-                    if(additionalService.equalsIgnoreCase("yes")){
+                    if(dog.getAdditionalService().equalsIgnoreCase("yes")){
                         System.out.println("What service? ");
-                        dog.setAdditionalService(sc.nextLine());
+                        dog.setAdditionalService(additionalService);
                         dog.setTotalCost(dog.getGroomCost(),dog.getBoardingCost(),dog.getCostDaycare(),dog.getCostAdditionalService());
                     }
                 }   
             }
-            dog.serviceFileInfo();
+            dog.newFile();
         }
     }
 }
+
+        
+        
+        
+        
+        
+        
+
+
