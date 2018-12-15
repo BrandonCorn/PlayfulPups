@@ -6,22 +6,22 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.lang.Math;
-
+import javax.swing.*;
 public class ServiceInfo extends DogBasicInfo
 {
 
-    public String dateArrive; 
-    public String dateDepart; 
-    public String timeOut;
-    public String groomService;
-    public float costGroom;
-    public String boardingService; 
-    public float costBoarding;
-    public String daycareService;
-    public float costDaycare;
-    public String additionalService;
-    public float costAdditionalService;
-    public float costTotalServices;
+    private String dateArrive; 
+    private String dateDepart; 
+    private String timeOut;
+    private String groomService;
+    private float costGroom;
+    private String boardingService; 
+    private float costBoarding;
+    private String daycareService;
+    private float costDaycare;
+    private String additionalService;
+    private float costAdditionalService;
+    private float costTotalServices;
     
     public ServiceInfo(){
         
@@ -183,7 +183,6 @@ public class ServiceInfo extends DogBasicInfo
         daycareService = ds;
     }
 
-
     /*returns the daycare service
      * no param
      */
@@ -222,9 +221,7 @@ public class ServiceInfo extends DogBasicInfo
     public float getCostAdditionalService(){
         return costAdditionalService;
     }
-    
-    
-    
+      
     public String dogInfo(){
         System.out.println("Date Arrive: " + dateArrive); 
         System.out.println("Date Depart: " + dateDepart); 
@@ -265,25 +262,33 @@ public class ServiceInfo extends DogBasicInfo
         costTotalServices + System.lineSeparator() + System.lineSeparator(); 
     }
     
-    public void serviceFileInfo(){
-        BufferedWriter output;        
-        String folderPath = "C:\\Users\\corn_\\OneDrive\\Documents\\dogFiles\\" + dogFirstname + dogLastname + "\\Services";
-        File serviceDir = new File(folderPath);
-        try{
-            serviceDir.mkdirs();            
+    public void newDirectory(){
+        JFileChooser f = new JFileChooser();
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retrieval = f.showSaveDialog(null);
+        if (retrieval == JFileChooser.APPROVE_OPTION){
+            try{
+                File fw = new File(f.getSelectedFile() + "\\" + dogFirstName + dogLastName);
+                fw.mkdirs();
+            }
+            catch(SecurityException e){
+            }          
         }
-        catch (SecurityException e){
-        }
-        String serviceFileName = folderPath + "\\" + dogFirstname + "Service.txt";
-        try{
-            File serviceFile = new File(serviceFileName);
-            output = new BufferedWriter(new FileWriter(serviceFileName));
-            output.write(serviceInfo());
-            output.close();
-        }
-        catch (IOException e){
-            
-        }
+    }
+    
+    public void newFile(){
+        JFileChooser f = new JFileChooser();
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retrieval = f.showSaveDialog(null);
+        if (retrieval == JFileChooser.APPROVE_OPTION){
+            try{
+                FileWriter fw = new FileWriter(f.getSelectedFile() + "\\" + dateArrive + ".txt");
+                fw.write(serviceInfo());
+                fw.close();
+            }
+            catch(Exception e){
+            }
+        }        
     }
 }
 
