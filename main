@@ -1,0 +1,90 @@
+
+/**
+ * Write a description of class Buttons here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.InputMismatchException;
+public class PlayfulPups extends JFrame implements ActionListener
+{
+
+     public static void main(String[] args){
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                new PlayfulPups().initGUI();
+            }
+        });
+        
+     }
+
+    public void initGUI(){
+        //Creates main interface for facility's services
+        JFrame frame = new JFrame("Playful Pups");
+        frame.setSize(700,700);
+        frame.setLocation(750,350);
+        frame.setVisible(true);
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Button to start check in of dog receiving services
+        JButton dogServices = new JButton("Dog Services");
+        dogServices.setBounds(75,250,150,75);
+        dogServices.addActionListener(this);
+        frame.add(dogServices);
+        //Button to open checklist 
+        JButton dogChecklist = new JButton("Dog Checklist");
+        dogChecklist.setBounds(250,250,150,75);
+        dogChecklist.addActionListener(this);
+        frame.add(dogChecklist);
+        //Button to open and edit dog's info in file 
+        JButton editDog = new JButton("Edit Dog's Info");
+        editDog.setBounds(425,250,150,75);
+        editDog.addActionListener(this);
+        frame.add(editDog);
+        
+    }
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if (command == "Dog Services"){
+            try{
+            runDogService();
+        }
+        catch(IOException f){}
+        }
+        
+        else if (command == "Edit Dog's Info"){
+            try{
+            editDogInfo();
+        }
+        catch(InputMismatchException g){}
+        }
+    
+        else if (command == "Dog Checklist"){
+            
+        }
+    }
+    
+    public void runDogService() throws IOException{
+        DogService ds = new DogService();
+        ds.dogService();
+    }
+    
+    public void editDogInfo(){
+        ServiceInfo si = new ServiceInfo();
+        si.editFile();
+    }
+}
+
